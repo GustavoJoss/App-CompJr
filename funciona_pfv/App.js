@@ -1,54 +1,18 @@
-import{ useState } from 'react'
-import{TinderSenha} from './src/components/modal'
-import{ View, Text, StyleSheet, Image, TouchableOpacity, Modal} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
+import * as React from 'react';
+import { StatusBar } from 'react-native';
+import { GestureHandlerRootView} from 'react-native-gesture-handler'
+
+import Routes from './src/routes/Index'
 
 export default function App(){
-  const[modalVisible, setModalVisible] = useState(false);
 
-  function saberClicou(){
-    setModalVisible(true);
-  }
+    return(
+        <NavigationContainer>
+            <StatusBar translucent backgroundColor="#0C1F3F"/>
+            <Routes/>
+        </NavigationContainer>
+    );
+}
 
-  return(
-    <View style = {styles.container}>
-      <Image
-      source={require("./src/assets/reyna.png")}
-      style={styles.logo}
-      />
-      <Text style={styles.logo}>
-        Valorant Tinder
-      </Text>
-      <TouchableOpacity style ={styles.button} onPress={saberClicou}>
-        <Text style ={styles.buttonText}> Entrar </Text>
-      </TouchableOpacity>
-      <Modal visible={modalVisible} animationType="fade" transparente={true}>
-        <TinderSenha/>
-      </Modal>
 
-    </View>
-    )
-  }
-
-  const styles = StyleSheet.create({
-    container:{
-      flex:1,
-      backgroundColor: "white",
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    logo:{
-      marginBottom: 30,
-    },
-    button:{
-      backgroundColor: "blue",
-      width: "60%",
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      borderRadius: 8,
-    },
-    buttonText:{
-      color: "#FFF",
-    }
-
-  })
