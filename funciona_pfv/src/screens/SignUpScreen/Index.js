@@ -13,6 +13,7 @@ export default function SignInScreen(){
     state = {
         email: '',
         password: '',
+        password:'',
     }
 
         return(

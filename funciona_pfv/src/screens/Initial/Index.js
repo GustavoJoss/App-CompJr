@@ -27,6 +27,7 @@ export default function Initial(){
     );
 }
 
+
 const styles = StyleSheet.create({
     container:{
         flex:1,

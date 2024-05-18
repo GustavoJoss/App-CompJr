@@ -84,6 +84,7 @@ export default function SignInScreen(){
             justifyContent: "center",
             borderRadius: 10,
             marginBottom: 20,
+            borderWidth: 1,
 
         }
     

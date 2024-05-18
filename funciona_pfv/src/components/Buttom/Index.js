@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TouchableWithoutFeedback, Animated} from 'react-native';
+import { View, StyleSheet, Text, TouchableWithoutFeedback, Animated, Modal} from 'react-native';
 import {AntDesign, Entypo} from '@expo/vector-icons'
+import ModalAddUser from '../ModalAddUser/Index';
 
 export default class Buttom extends Component {
 
+    state = {
+        isModalVisible: false,
+    };
+
+
     animation = new Animated.Value(0);
+    open = false;
 
     toggleMenu = () => {
         const toValue = this.open ? 0 : 1
@@ -17,6 +24,15 @@ export default class Buttom extends Component {
 
         this.open = !this.open;
     }
+
+    toggleModal = () => {
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+    };
+    handleAddUser = newUser => {
+        this.props.onAddUser(newUser);
+        this.toggleModal(); // Fechar o modal após adicionar um usuário
+    };
+
     render(){
 
         const addUserGroupStyle = {
@@ -44,7 +60,7 @@ export default class Buttom extends Component {
         return(
             <View style = {[styles.container, this.props.style]}>
 
-                <TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={this.toggleModal}>
                     <Animated.View style = {[styles.buttom, styles.submenu, addUserGroupStyle]}>
                         <AntDesign name = "addusergroup" size = {20} color = "#FFF"/> 
                     </Animated.View>
@@ -55,6 +71,10 @@ export default class Buttom extends Component {
                         <AntDesign name = "plus" size = {24} color = "#FFF"/>
                     </Animated.View>
                 </TouchableWithoutFeedback>
+
+                {this.state.isModalVisible && (
+                    <ModalAddUser onClose={this.toggleModal} onAddUser={this.handleAddUser} />
+                )}
 
 
             </View>
